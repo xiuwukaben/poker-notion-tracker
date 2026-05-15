@@ -72,7 +72,7 @@ def print_notion_error(response: requests.Response) -> None:
 
     if response.status_code == 400:
         print("原因候補: Notionデータベースの列名または列の種類が、Pythonコードと一致していない可能性があります。")
-        print("確認する列名: Name, Hands, Actual bb, EV bb, EV Gap, Actual bb/100, EV bb/100, Tilt Level, A-Game Score, Memo")
+        print("確認する列名: Name, Session Date, Hands, Actual bb, EV bb, EV Gap, Actual bb/100, EV bb/100, Tilt Level, A-Game Score, Memo")
     elif response.status_code == 401:
         print("原因候補: NOTION_TOKEN が間違っている、または無効になっている可能性があります。")
     elif response.status_code == 403:
@@ -101,8 +101,10 @@ def create_poker_session(
     ev_gap = actual_bb - ev_bb
     actual_bb_per_100 = actual_bb / hands * 100
     ev_bb_per_100 = ev_bb / hands * 100
-    session_title = datetime.now().strftime("Poker Session %Y-%m-%d %H:%M")
 
+    session_datetime = datetime.now()
+    session_title = session_datetime.strftime("Poker Session %Y-%m-%d %H:%M")
+    session_date = session_datetime.strftime("%Y-%m-%d")
     headers = {
         "Authorization": f"Bearer {NOTION_TOKEN}",
         "Content-Type": "application/json",
@@ -122,6 +124,11 @@ def create_poker_session(
                         }
                     }
                 ]
+            },
+            "Session Date": {
+                "date": {
+                    "start": session_date,
+                }
             },
             "Hands": {
                 "number": hands,
