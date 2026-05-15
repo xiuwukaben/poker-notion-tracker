@@ -129,6 +129,62 @@ Memo:
 
 入力が完了すると、Notionデータベースにセッション記録が追加されます。
 
+## 実行例
+
+```text
+$ .\.venv\Scripts\python.exe main.py
+
+Hands: 1000
+Actual bb: 117
+EV bb: -245
+Tilt Level: 3
+A-Game Score: 4
+Memo: Large EV gap session. Stayed mostly calm despite variance.
+
+Session successfully added to Notion.
+```
+
+この入力例では、以下の値が自動計算されます。
+
+| 項目 | 値 |
+|---|---:|
+| EV Gap | 362 |
+| Actual bb/100 | 11.7 |
+| EV bb/100 | -24.5 |
+
+## Notion登録例
+
+Notionデータベースには、以下のようなレコードが追加されます。
+
+| 列名 | 登録される値の例 |
+|---|---|
+| Name | Poker Session - 2026-05-15 |
+| Session Date | 2026-05-15 |
+| Hands | 1000 |
+| Actual bb | 117 |
+| EV bb | -245 |
+| EV Gap | 362 |
+| Actual bb/100 | 11.7 |
+| EV bb/100 | -24.5 |
+| Tilt Level | 3 |
+| A-Game Score | 4 |
+| Memo | Large EV gap session. Stayed mostly calm despite variance. |
+
+Session successfully added to Notion.
+
+実行すると、ターミナル上で以下の情報を入力します。
+
+```text
+Hands:
+Actual bb:
+EV bb:
+Tilt Level:
+A-Game Score:
+Memo:
+```
+
+入力が完了すると、Notionデータベースにセッション記録が追加されます。
+
 ## 構文チェック
 
 コードの構文チェックは以下で行います。
