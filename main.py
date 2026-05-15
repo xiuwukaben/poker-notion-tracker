@@ -98,10 +98,12 @@ def create_poker_session(
 ) -> dict:
     """Notionデータベースにポーカーセッションを1件追加する。"""
 
+    # セッション分析用の派生指標を計算する。
     ev_gap = actual_bb - ev_bb
     actual_bb_per_100 = actual_bb / hands * 100
     ev_bb_per_100 = ev_bb / hands * 100
 
+    # Notionで日付フィルターを使えるように、セッション日付を保存する。
     session_datetime = datetime.now()
     session_title = session_datetime.strftime("Poker Session %Y-%m-%d %H:%M")
     session_date = session_datetime.strftime("%Y-%m-%d")
@@ -111,6 +113,7 @@ def create_poker_session(
         "Notion-Version": NOTION_VERSION,
     }
 
+    # Notionデータベースの列構成に合わせて送信用データを作成する。
     payload = {
         "parent": {
             "database_id": NOTION_DATABASE_ID,
